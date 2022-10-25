@@ -80,11 +80,12 @@ class Index:
         1. 캐시 로드
         2. 토크나이징
         3. 클리닝
-        4. 스테밍
-        5. 불용어 제거
-        6. BoW(Bag of Words) 생성 및 캐싱
-        7. TF-IDF 행렬 생성 및 캐싱
-        8. LF 행렬 생성 및 캐싱
+        4. 표제어 추출
+        5. 어간 추출
+        6. 불용어 제거
+        7. BoW(Bag of Words) 생성 및 캐싱
+        8. TF-IDF 행렬 생성 및 캐싱
+        9. LF 행렬 생성 및 캐싱
     """
 
     def __init__(self):
@@ -97,6 +98,7 @@ class Index:
     def preprocess(self, query):
         tokens = self.tokenization(query)
         tokens = self.cleaning(tokens)
+        tokens = self.lemmatization(tokens)
         tokens = self.stemming(tokens)
         return self.stopword(tokens)
 
@@ -116,6 +118,7 @@ class Index:
             content = self.repo.load(f'data/raw/{file}')
             tokens = self.tokenization(content)
             tokens = self.cleaning(tokens)
+            tokens = self.lemmatization(tokens)
             tokens = self.stemming(tokens)
             tokens = self.stopword(tokens)
             result = self.integer_encoding(tokens)
@@ -145,9 +148,17 @@ class Index:
         return result
 
     @classmethod
+    def lemmatization(self, tokens):
+        """
+            4. 표제어 추출
+        """
+        lemmatizer = nltk.WordNetLemmatizer()
+        return [lemmatizer.lemmatize(word) for word in tokens]
+
+    @classmethod
     def stemming(self, tokens):
         """
-            4. 스테밍
+            5. 어간 추출
         """
         stemmer = nltk.PorterStemmer()
         return [stemmer.stem(word) for word in tokens]
@@ -155,7 +166,7 @@ class Index:
     @classmethod
     def stopword(self, tokens):
         """
-            5. 불용어 제거
+            6. 불용어 제거
         """
         stop_words = set(nltk.corpus.stopwords.words('english'))
         result = []
@@ -167,14 +178,14 @@ class Index:
     @classmethod
     def integer_encoding(self, tokens):
         """
-            6. BoW(Bag of Words) 생성 및 캐싱
+            7. BoW(Bag of Words) 생성 및 캐싱
         """
         return nltk.FreqDist(tokens).most_common(100)
 
     @printer('TF-IDF')
     def tf_idf(self):
         """
-            7. TF-IDF 행렬 생성 및 캐싱
+            8. TF-IDF 행렬 생성 및 캐싱
         """
         count = 0
         text = []
@@ -205,7 +216,7 @@ class Index:
     @printer('Latent-Factor')
     def latent_factor(self):
         """
-            8. LF 행렬 생성 및 캐싱
+            9. LF 행렬 생성 및 캐싱
         """
         # 캐시(TF-IDF 행렬) 로드
         print('1.\tLoad Cache')
