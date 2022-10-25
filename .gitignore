@@ -1,6 +1,7 @@
 data/*.db
 data/temp
 .cache
+crawler.py
 
 fake-data_generator/node_modules
 fake_blog/node_modules
