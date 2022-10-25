@@ -1,5 +1,5 @@
-# Unghee.dev
+# Fake-Blog for project
 
-## This project is to make my own BLOG.
+## This project is to make FAKE BLOG.
 
 ### With NextJS, TailwindCSS and Ect...
