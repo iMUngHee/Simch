@@ -1,0 +1,173 @@
+---
+id: 134
+title: Node-v18.2.0-(Current)-|-Node.js
+date: 'Oct 25 2022'
+tags: ["node","news"]
+metaTags: ["node","news"]
+cover_image: https://velog.velcdn.com/images/mayinjanuary/post/e1ff9d4e-541f-418f-b411-4ab9f39aee16/nodejs.png
+description: ''
+---
+
+
+        
+          Node v18.2.0 (Current)
+          by Rafael Gonzaga, 2022-05-17
+        
+
+        Notable ChangesOpenSSL 3.0.3This update can be treated as a security release as the issues addressed in OpenSSL 3.0.3 slightly affect Node.js 18.
+See https://nodejs.org/en/blog/vulnerability/openssl-fixes-in-regular-releases-may2022/ for more information on how the May 2022 OpenSSL releases affect other Node.js release lines.
+
+[8e54c19a6e] - deps: update archs files for quictls/openssl-3.0.3+quic (RafaelGSS) #43022
+[6365bf808e] - deps: upgrade openssl sources to quictls/openssl-3.0.3 (RafaelGSS) #43022
+
+Other Notable Changes
+[13c333e533] - Revert "deps: add template for generated headers" (Daniel Bevenius) #42978
+[d128356a7f] - deps: update undici to 5.2.0 (Node.js GitHub Bot) #43059
+[2df1624f80] - deps: upgrade npm to 8.9.0 (npm team) #42968
+[6365bf808e] - deps: upgrade openssl sources to quictls/openssl-3.0.3 (RafaelGSS) #43022
+[4a3f678e70] - doc: add LiviaMedeiros to collaborators (LiviaMedeiros) #43039
+[686c4c1f6f] - doc: add release key for Juan Arboleda (Juan José) #42961
+[784d84cf34] - (SEMVER-MINOR) fs: add read(buffer[, options]) versions (LiviaMedeiros) #42768
+[2f192c4be0] - (SEMVER-MINOR) http: added connection closing methods (Paolo Insogna) #42812
+[c92e291beb] - (SEMVER-MINOR) perf_hooks: add PerformanceResourceTiming (RafaelGSS) #42725
+
+Commits
+[7cac7bb806] - assert: fix CallTracker wraps the function causes the length to be lost (OneNail) #42909
+[e74a8da287] - assert: make assert.fail less affected by prototype tampering (Antoine du Hamel) #42918
+[1146806673] - bootstrap: stop delaying instantiation of maps in per-context scripts (Darshan Sen) #42934
+[a20310d171] - bootstrap: use a context snapshotted with primordials in workers (Joyee Cheung) #42867
+[9ee7d9eb15] - bootstrap: fix wasm_web_api external reference registration (Joyee Cheung) #42903
+[cec678a00e] - build: set ASAN workaround (Richard Lau) #43085
+[7c4df42caa] - build: disable windows-2022 temporarily (Jiawen Geng) #43093
+[0eb32ed976] - build: fix various shared library build issues (William Marlow) #41850
+[48f4a714b2] - build: fix indeterminacy of icu_locales value (Sergey Nazaryev) #42865
+[19c060fd84] - crypto: adjust minimum length in generateKey('hmac', ...) (LiviaMedeiros) #42944
+[183bcc0699] - crypto: clean up parameter validation in HKDF (Tobias Nießen) #42924
+[946f57c7bc] - debugger: fix inconsistent inspector output of exec new Map() (Kohei Ueno) #42423
+[d128356a7f] - deps: update undici to 5.2.0 (Node.js GitHub Bot) #43059
+[a9703a55ef] - deps: remove opensslconf template headers (Daniel Bevenius) #43035
+[a4a4f7134b] - deps: fix llhttp version number (Michael Dawson) #43029
+[8e54c19a6e] - deps: update archs files for quictls/openssl-3.0.3+quic (RafaelGSS) #43022
+[6365bf808e] - deps: upgrade openssl sources to quictls/openssl-3.0.3 (RafaelGSS) #43022
+[e8121ae7fe] - deps: regenerate OpenSSL archs files (Daniel Bevenius) #42978
+[13c333e533] - Revert "deps: add template for generated headers" (Daniel Bevenius) #42978
+[2df1624f80] - deps: upgrade npm to 8.9.0 (npm team) #42968
+[f53ed9d1bb] - doc: use serial comma in fs docs (Tobias Nießen) #43104
+[839824aca8] - doc: use serial comma in events docs (Tobias Nießen) #43113
+[9629c74080] - doc: use serial comma in modules docs (Tobias Nießen) #43103
+[76096c2d4a] - doc: use serial comma in util docs (Tobias Nießen) #43063
+[1e9de0dd5a] - doc: remove git:// protocol, adjust nits in onboarding.md (LiviaMedeiros) #43045
+[eb630d7ef9] - doc: add maintaining info for shared libary option (Michael Dawson) #42517
+[3816a97bae] - doc: add detail for how to update llhttp (Michael Dawson) #43028
+[330e267a57] - doc: use serial comma in buffer docs (Tobias Nießen) #43048
+[0957212390] - doc: use consistent method symbol (Paolo Insogna) #42974
+[22cb7104cb] - doc: add Rafael to the security steward for NearForm (Matteo Collina) #42966
+[ef177da3f1] - doc: mark some node-api functions as experimental (NickNaso) #42987
+[4a3f678e70] - doc: add LiviaMedeiros to collaborators (LiviaMedeiros) #43039
+[c988a0ed26] - doc: use serial comma in http docs (Tobias Nießen) #43026
+[4de918b4c1] - doc: add the preferred name for @himself65 (Himself65) #43024
+[686c4c1f6f] - doc: add release key for Juan Arboleda (Juan José) #42961
+[64e0aa116d] - doc: rename N-API to Node-API in test/README.md (Daeyeon Jeong) #42946
+[65d64553c0] - doc: use serial comma in tls docs (Tobias Nießen) #43001
+[840e61e745] - doc: improve commit message example for releases (Juan José) #42954
+[ba3ad7c665] - doc: use serial comma in cluster docs (Tobias Nießen) #42989
+[3ab3086008] - doc: fix errors in Web Streams doc (OneNail) #42862
+[1fbfee2497] - doc: fix examples in cluster.md (OneNail) #42889
+[1237c742f4] - doc: add additional step to security release process (Michael Dawson) #42916
+[88692d8fd6] - doc: add section regarding property definition in primordials.md (Antoine du Hamel) #42921
+[924670f3af] - doc: clarify some default values in fs.md (LiviaMedeiros) #42892
+[becca06f9b] - fs: remove unnecessary ?? operator (Morgan Roderick) #43073
+[784d84cf34] - (SEMVER-MINOR) fs: add read(buffer[, options]) versions (LiviaMedeiros) #42768
+[2f192c4be0] - (SEMVER-MINOR) http: added connection closing methods (Paolo Insogna) #42812
+[bfbf965eb0] - http2: compat support for array headers (OneNail) #42901
+[46a44b3011] - lib: move WebAssembly Web API into separate file (Tobias Nießen) #42993
+[c64b8d3282] - lib,test: enable wasm/webapi/empty-body WPT (Tobias Nießen) #42960
+[ddd271ec2b] - meta: add mailmap entry for ShogunPanda (Paolo Insogna) #43094
+[174ff972f0] - meta: update .mailmap for recent README name change (Rich Trott) #43027
+[16df8ad7c3] - meta: update AUTHORS (Node.js GitHub Bot) #43004
+[0ec32d0715] - meta: move one or more collaborators to emeritus (Node.js GitHub Bot) #42937
+[037ff3da6d] - node-api: explicitly set __cdecl for API functions (Vladimir Morozov) #42780
+[e2462a2f98] - node-api: fix napi_get_all_property_names (Vladimir Morozov) #42463
+[c92e291beb] - (SEMVER-MINOR) perf_hooks: add PerformanceResourceTiming (RafaelGSS) #42725
+[c535db1195] - src: delete AllocatedBuffer (Darshan Sen) #43008
+[5dc79298e1] - src: remove unnecessary comment (Kohei Ueno) #42952
+[38e4c15534] - src: always signal V8 for intercepted properties (Michaël Zasso) #42963
+[cacff07e75] - src: fix memory leak for v8.serialize (liuxingbaoyu) #42695
+[8cfc18e4db] - src,crypto: remove uses of AllocatedBuffer from crypto_rsa.cc (Darshan Sen) #42852
+[0670843b24] - test: fix dangerous .map in test/parallel/test-http-set-trailers.js (LiviaMedeiros) #43087
+[9eb8bf1d26] - test: reduce flakiness of test-fs-read-position-validation.mjs (LiviaMedeiros) #42999
+[41d2f6e8c5] - test: rename handlewrap.hasref tests (Daeyeon Jeong) #42754
+[e058f47277] - test: improve observable ICU behaviour coverage (LiviaMedeiros) #42683
+[d23debb4cb] - test: validate webstream encoder/decoder inspector (Yoshiki Kurihara) #42747
+[b1c18edaa9] - test: usemustSucceed instead of mustCall with assert.ifError (MURAKAMI Masahiko) #42806
+[2dc795687a] - test: improve lib/internal/webstreams/readablestream.js coverage (MURAKAMI Masahiko) #42823
+[d746207dc2] - test: fix test-crypto-fips.js under shared OpenSSL (Vita Batrla) #42947
+[56c47b5101] - test: use consistent timeouts (Paolo Insogna) #42893
+[68ed3c88d9] - test: add test for position validation in fs.read() and fs.readSync() (LiviaMedeiros) #42837
+[72b90fd5f5] - test: reduce impact of flaky HTTP server tests (Tobias Nießen) #42926
+[531a0a9980] - tools: update lint-md-dependencies to [email protected] (Node.js GitHub Bot) #43107
+[64daaca46d] - tools: update eslint to 8.15.0 (Node.js GitHub Bot) #43005
+[79872382ef] - tools: refactor lint-sh.js to esm module (Feng Yu) #42942
+[265ecdfe07] - tools: update lint-md-dependencies (Node.js GitHub Bot) #43003
+[e9e1f1e194] - typings: fix os.cpus invalid return type (Himself65) #43006
+[55ef6e81cb] - wasm: add missing init reported by coverity (Michael Dawson) #42897
+[5470578008] - worker: fix stream racing with terminate (Keyhan Vakil) #42874
+
+Windows 64-bit Installer: https://nodejs.org/dist/v18.2.0/node-v18.2.0-x64.msi
+Windows 64-bit Binary: https://nodejs.org/dist/v18.2.0/win-x64/node.exe
+macOS 64-bit Installer: https://nodejs.org/dist/v18.2.0/node-v18.2.0.pkg
+macOS Apple Silicon 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-darwin-arm64.tar.gz
+macOS Intel 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-darwin-x64.tar.gz
+Linux 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-linux-x64.tar.xz
+Linux PPC LE 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-linux-ppc64le.tar.xz
+Linux s390x 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-linux-s390x.tar.xz
+AIX 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-aix-ppc64.tar.gz
+ARMv7 32-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-linux-armv7l.tar.xz
+ARMv8 64-bit Binary: https://nodejs.org/dist/v18.2.0/node-v18.2.0-linux-arm64.tar.xz
+Source Code: https://nodejs.org/dist/v18.2.0/node-v18.2.0.tar.gz
+Other release files: https://nodejs.org/dist/v18.2.0/
+Documentation: https://nodejs.org/docs/v18.2.0/api/
+SHASUMS-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+7bb0a93a3f6b9b0a46194420fc554c1d12682aef7d8822cfd2bbb3639f5b2059  node-v18.2.0-aix-ppc64.tar.gz
+d140f15ca709767365e09edd0cb345f10f32f582d82d726f67f63dd7db4443d1  node-v18.2.0-darwin-arm64.tar.gz
+c73ea354c84c3bd9889c064346b6e3aaa292c33f1fb4a4793cdee7a155a5a67e  node-v18.2.0-darwin-arm64.tar.xz
+0b03647ac5805df335c6601d1a1838c6a2f4edbed7d098982bfd39e71b5fd8f8  node-v18.2.0-darwin-x64.tar.gz
+e4d277afacb96e7d492dab3613a1612853e9a67a3a528dfc7e124a4c7370f0d6  node-v18.2.0-darwin-x64.tar.xz
+c7dba1404ea1457a8c8292821d02fc835c862f716d7f5cab3aab545d6847a814  node-v18.2.0-headers.tar.gz
+97a017643b40a91f73f5f3b0d91f4f653406ba05b7dd6e2129454ad6f49c2e28  node-v18.2.0-headers.tar.xz
+9dc8ca472c79e842d4faf600876b643ab485936fe4870fbafaa7c19b2d153353  node-v18.2.0-linux-arm64.tar.gz
+ad2c1e533db66cfb47e770c1f4af6807e1ce68cdce8aa230d26f025d0926d0c4  node-v18.2.0-linux-arm64.tar.xz
+ace6a5da82794e1f364d284ee241b24c08048677c77b24c370c5a677189400f7  node-v18.2.0-linux-armv7l.tar.gz
+1d7c6c8fb0715a501b889a58de9d3c7a54a0c62578ea4109d2b17adaf12a99f7  node-v18.2.0-linux-armv7l.tar.xz
+d81d0ede439e082971c02e4d64ee95e5215753cfa3891cdfafd266c221767c21  node-v18.2.0-linux-ppc64le.tar.gz
+053824eeb17a1afea11e437a2ae9061568e9ab95daa0ea818cfcd4246bfd950c  node-v18.2.0-linux-ppc64le.tar.xz
+f11f97a74b3a7ae19d8acac166e9de5e3e095a54ba5a0d7afaefd77b589f277f  node-v18.2.0-linux-s390x.tar.gz
+1dbe758651e66ba47b9f1a5650a295f424fe36bcd709e7ef71f9a4668c2f3081  node-v18.2.0-linux-s390x.tar.xz
+73d3f98e96e098587c2154dcaa82a6469a510e89a4881663dc4c86985acf245e  node-v18.2.0-linux-x64.tar.gz
+22f9d2e71fe682091f1ec5f8be5703868069f5547a866bdddc8e661040b28527  node-v18.2.0-linux-x64.tar.xz
+ac92b964ce08c96ac44da76df764e5981f319c7fc0c35dc49deab1188fa5d292  node-v18.2.0.pkg
+bb9c117814341676edbfd7c79cfaaac2d809e760a65fe9afe050245d55bb7ca7  node-v18.2.0.tar.gz
+2305b15ebf5547474e905b5002f9ba99c7eeef01d7394dfe6f3846cc6bcad66d  node-v18.2.0.tar.xz
+09586f2af26a5d73cfe95f7b576c058fe359de126c3d3655e00cb010261a97ba  node-v18.2.0-win-x64.7z
+deaa04e8ba65e568f02452c9313b9e6ee80fcef9c0929062fc5175a401fa05ce  node-v18.2.0-win-x64.zip
+c10293d857223e8f9afd79f8f2e021d1cf07920d108b9e285cd48bdcad9d5076  node-v18.2.0-x64.msi
+09392b4eaa439add5a8e9e1cfb44dedf0b748a7bcad4257aa8ad187a6d0a432a  win-x64/node.exe
+005cd83dd73e222a2fa36a967b365749feb9e39eddd0078b6ef0df7802494671  win-x64/node.lib
+d854462a87392625086808337c716ab4e1a49213b1a93ea47d0f5dc02b57a1e4  win-x64/node_pdb.7z
+3cf29058aceac04ee87176285be14bdf933aa7c8cf1bdfb8c206fecf51c29494  win-x64/node_pdb.zip
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEETtd49TnjY0x3nIfG1wYoSKGrAFwFAmKDwxQACgkQ1wYoSKGr
+AFwidQgAxcmGJLVf/TyOG15u130P58YPfFVYJEJ92EghnVeVeMtwBDOTmxvG+lWE
+Vjs52CdtsU5zN1ZpLaP4OGJ/1eisPgObEjfQGRv/xvBcqtKYQ8L+l4zFEZc7xJAU
+9TyTR/BnOA+MqjCYqLB0uP0uf0hYNL3MG8i9th1af3zUPGbodLC3L5qNXyhBUvGL
+uhAefFbKTfJMnms72YHE6g9DeDP6UXiMwi0DvCPQeKnE56SwpgwqQJwESk4/2ehu
+WKgdPI45F78uQCrfBw5oMjI/W8fbcAadr30HHdJWPQBmqprAIjF4ulRZ/UGCHil3
+BKxuj6SaEjlzAO3OBnOTqPnQDJSMbQ==
+=rqCH
+-----END PGP SIGNATURE-----
+
+
+      

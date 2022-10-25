@@ -1,0 +1,6 @@
+
+
+Hi, Spring fans! In this installment, Josh Long (@starbuxma) talks to his friend, Microsoft’s Asir Selvasingh (@asirselvasingh), about Azure Spring Apps, Java at Microsoft, Spring, application security, and more. Want to learn more? Join us at SpringOne (6-8 December 2022)!
+
+
+

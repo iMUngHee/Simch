@@ -1,0 +1,6 @@
+
+
+            Multi-line input
+            Usually, when we put a line of code into the console, and then press Enter, it executes.
+To insert multiple lines, press Shift+Enter. This way one can enter long fragments of JavaScript code.
+

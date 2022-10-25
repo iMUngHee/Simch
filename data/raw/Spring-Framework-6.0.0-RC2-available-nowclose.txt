@@ -1,0 +1,7 @@
+
+
+On behalf of the team and everyone who has contributed, I am pleased to announce that Spring Framework 6.0.0-RC2 is available now.
+Spring Framework 6.0.0-RC2 includes 28 fixes and improvements. Stay tuned for the announcement of Spring Boot 3.0.0-RC1 later today!
+Project Page | GitHub | Issues | Documentation
+
+

@@ -1,0 +1,8 @@
+
+
+On behalf of the team and everyone who has contributed, I’m happy to announce that Spring Boot 2.6.13 has been released and is now available from Maven Central.
+This release includes 27 bug fixes, documentation improvements, and dependency upgrades. Thanks to all those who have contributed with issue reports and pull requests.How can you help?
+If you’re interested in helping out, check out the “ideal for contribution” tag in the issue repository. If you have general questions, please ask on stackoverflow.com using the spring-boot tag or chat with the community on Gitter.
+Project Page | GitHub | Issues | Documentation | Stack Overflow | Gitter
+
+

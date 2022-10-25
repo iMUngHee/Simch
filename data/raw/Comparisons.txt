@@ -1,0 +1,208 @@
+
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( 2 > 1 );  // true (correct)
+alert( 2 == 1 ); // false (wrong)
+alert( 2 != 1 ); // true (correct)
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let result = 5 > 4; // assign the result of the comparison
+alert( result ); // true
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( 'Z' > 'A' ); // true
+alert( 'Glow' > 'Glee' ); // true
+alert( 'Bee' > 'Be' ); // true
+        
+      
+      
+      
+            Not a real dictionary, but Unicode order
+            The comparison algorithm given above is roughly equivalent to the one used in dictionaries or phone books, but it’s not exactly the same.
+For instance, case matters. A capital letter "A" is not equal to the lowercase "a". Which one is greater? The lowercase "a". Why? Because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode). We’ll get back to specific details and consequences of this in the chapter Strings.
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( '2' > 1 ); // true, string '2' becomes a number 2
+alert( '01' == 1 ); // true, string '01' becomes a number 1
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( true == 1 ); // true
+alert( false == 0 ); // true
+        
+      
+      
+      
+            A funny consequence
+            It is possible that at the same time:
+
+Two values are equal.
+One of them is true as a boolean and the other one is false as a boolean.
+
+For example:
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let a = 0;
+alert( Boolean(a) ); // false
+
+let b = "0";
+alert( Boolean(b) ); // true
+
+alert(a == b); // true!
+        
+      
+      
+      From JavaScript’s standpoint, this result is quite normal. An equality check converts values using the numeric conversion (hence "0" becomes 0), while the explicit Boolean conversion uses another set of rules.
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( 0 == false ); // true
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( '' == false ); // true
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( 0 === false ); // false, because the types are different
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( null > 0 );  // (1) false
+alert( null == 0 ); // (2) false
+alert( null >= 0 ); // (3) true
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert( undefined > 0 ); // false (1)
+alert( undefined < 0 ); // false (2)
+alert( undefined == 0 ); // false (3)
+        
+      
+      
+      

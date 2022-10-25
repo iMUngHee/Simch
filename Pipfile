@@ -4,10 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-dev = "uvicorn main:app --reload --port 8080"
+dev = "uvicorn src.main:app --reload --port 8080"
+setup = "python3 src/script/set-up.py"
 
 [packages]
 fastapi = {extras = ["all"], version = "*"}
+sklearn = "*"
+nltk = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+requests = "*"
+pandas = "*"
+matplotlib = "*"
 
 [dev-packages]
 autopep8 = "*"

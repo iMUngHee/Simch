@@ -1,2 +1,5 @@
-data
-config
+data/*.db
+data/temp
+.cache
+
+fake-data_generator/node_modules

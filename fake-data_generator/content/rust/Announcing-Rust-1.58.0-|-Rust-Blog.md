@@ -1,0 +1,126 @@
+---
+id: 237
+title: Announcing-Rust-1.58.0-|-Rust-Blog
+date: 'Oct 25 2022'
+tags: ["rust","blog"]
+metaTags: ["rust","blog"]
+cover_image: https://velog.velcdn.com/images/eslerkang/post/8a992631-4128-444f-9d54-9a354dc15984/cuddlyferris.png
+description: ''
+---
+
+
+      The Rust team is happy to announce a new version of Rust, 1.58.0.
+Rust is a programming language empowering everyone to build reliable and efficient software.
+If you have a previous version of Rust installed via rustup, getting Rust 1.58.0 is as easy as:
+rustup update stable
+
+If you don't have it already, you can get rustup
+from the appropriate page on our website, and check out the
+detailed release notes for 1.58.0 on GitHub.
+What's in 1.58.0 stable
+Rust 1.58 brings captured identifiers in format strings, a change to the
+Command search path on Windows, more #[must_use] annotations in the
+standard library, and some new library stabilizations.
+Captured identifiers in format strings
+Format strings can now capture arguments simply by writing {ident} in the
+string. Formats have long accepted positional arguments (optionally by index)
+and named arguments, for example:
+println!("Hello, {}!", get_person());                // implicit position
+println!("Hello, {0}!", get_person());               // explicit index
+println!("Hello, {person}!", person = get_person()); // named
+
+Now named arguments can also be captured from the surrounding scope, like:
+let person = get_person();
+// ...
+println!("Hello, {person}!"); // captures the local `person`
+
+This may also be used in formatting parameters:
+let (width, precision) = get_format();
+for (name, score) in get_scores() {
+  println!("{name}: {score:width$.precision$}");
+}
+
+Format strings can only capture plain identifiers, not arbitrary paths or
+expressions. For more complicated arguments, either assign them to a local name
+first, or use the older name = expression style of formatting arguments.
+This feature works in all macros accepting format strings. However, one corner
+case is the panic! macro in 2015 and 2018 editions, where panic!("{ident}")
+is still treated as an unformatted string -- the compiler will warn about this
+not having the intended effect. Due to the 2021 edition's update of panic
+macros for improved consistency, this works as expected in 2021 panic!.
+Reduced Windows Command search path
+On Windows targets, std::process::Command will no longer search the current
+directory for executables. That effect was owed to historical behavior of the
+win32 CreateProcess API, so Rust was effectively searching in this order:
+
+(Rust specific) The directories that are listed in the child's PATH
+environment variable, if it was explicitly changed from the parent.
+The directory from which the application loaded.
+The current directory for the parent process.
+The 32-bit Windows system directory.
+The 16-bit Windows system directory.
+The Windows directory.
+The directories that are listed in the PATH environment variable.
+
+However, using the current directory can lead to surprising results, or even
+malicious behavior when dealing with untrusted directories. For example,
+ripgrep published CVE-2021-3013 when they learned that their child
+processes could be intercepted in this way. Even Microsoft's own PowerShell
+documents that they do not use the current directory for security.
+Rust now performs its own search without the current directory, and the legacy
+16-bit directory is also not included, as there is no API to discover its
+location. So the new Command search order for Rust on Windows is:
+
+The directories that are listed in the child's PATH environment variable.
+The directory from which the application loaded.
+The 32-bit Windows system directory.
+The Windows directory.
+The directories that are listed in the PATH environment variable.
+
+Non-Windows targets continue to use their platform-specific behavior, most
+often only considering the child or parent PATH environment variable.
+More #[must_use] in the standard library
+The #[must_use] attribute can be applied to types or functions when failing
+to explicitly consider them or their output is almost certainly a bug. This has
+long been used in the standard library for types like Result, which should be
+checked for error conditions. This also helps catch mistakes such as expecting
+a function to mutate a value in-place, when it actually returns a new value.
+Library proposal 35 was approved in October 2021 to audit and expand the
+application of #[must_use] throughout the standard library, covering many
+more functions where the primary effect is the return value. This is similar
+to the idea of function purity, but looser than a true language feature. Some
+of these additions were present in release 1.57.0, and now in 1.58.0 the effort
+has completed.
+Stabilized APIs
+The following methods and trait implementations were stabilized.
+
+Metadata::is_symlink
+Path::is_symlink
+{integer}::saturating_div
+Option::unwrap_unchecked
+Result::unwrap_unchecked
+Result::unwrap_err_unchecked
+File::options
+
+The following previously stable functions are now const.
+
+Duration::new
+Duration::checked_add
+Duration::saturating_add
+Duration::checked_sub
+Duration::saturating_sub
+Duration::checked_mul
+Duration::saturating_mul
+Duration::checked_div
+
+Other changes
+There are other changes in the Rust 1.58.0 release: check out what changed in
+Rust,
+Cargo,
+and Clippy.
+Contributors to 1.58.0
+Many people came together to create Rust 1.58.0.
+We couldn't have done it without all of you.
+Thanks!
+
+    

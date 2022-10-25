@@ -1,0 +1,1 @@
+[["height", 6], ["number", 4], ["run", 2], ["transpil", 2], ["math.trunc", 2], ["function", 2], ["math.ceil", 2], ["math.floor", 2], ["befor", 1], ["undefin", 1], ["null", 1], ["implement", 1], ["exist", 1], ["even", 1], ["ancient", 1], ["javascript", 1], ["engin", 1], ["cover", 1], ["later", 1], ["tutori", 1], ["return", 1]]
