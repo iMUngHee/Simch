@@ -1,4 +1,4 @@
-# SIMCH: Simple Search Engine using Data Mining
+# SIMCH(深趣): Simple Search Engine using Data Mining
 
 - Naive Algorithm (BoW)
 
