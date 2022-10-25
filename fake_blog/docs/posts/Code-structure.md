@@ -1,0 +1,226 @@
+---
+id: 128
+title: Code-structure
+date: 'Oct 25 2022'
+tags: ["javascript","guide"]
+metaTags: ["javascript","guide"]
+cover_image: https://velog.velcdn.com/images/xedni/post/d36b4026-f1ff-498e-b149-99e67a9b8691/title_javascript2.png
+description: ''
+---
+
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert('Hello'); alert('World');
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert('Hello');
+alert('World');
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert('Hello')
+alert('World')
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert(3 +
+1
++ 2);
+        
+      
+      
+      
+            An example of an error
+            If you’re curious to see a concrete example of such an error, check this code out:
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert("Hello");
+
+[1, 2].forEach(alert);
+        
+      
+      
+      No need to think about the meaning of the brackets [] and forEach yet. We’ll study them later. For now, just remember the result of running the code: it shows Hello, then 1, then 2.
+Now let’s remove the semicolon after the alert:
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert("Hello")
+
+[1, 2].forEach(alert);
+        
+      
+      
+      The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+If we run this code, only the first Hello shows (and there’s an error, you may need to open the console to see it). There are no numbers any more.
+That’s because JavaScript does not assume a semicolon before square brackets [...]. So, the code in the last example is treated as a single statement.
+Here’s how the engine sees it:
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          alert("Hello")[1, 2].forEach(alert);
+        
+      
+      
+      Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after alert for the code to work correctly.
+This can happen in other situations also.
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          // This comment occupies a line of its own
+alert('Hello');
+
+alert('World'); // This comment follows the statement
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          /* An example with two messages.
+This is a multiline comment.
+*/
+alert('Hello');
+alert('World');
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          /* Commenting out the code
+alert('Hello');
+*/
+alert('World');
+        
+      
+      
+      
+            Use hotkeys!
+            In most editors, a line of code can be commented out by pressing the Ctrl+/ hotkey for a single-line comment and something like Ctrl+Shift+/ – for multiline comments (select a piece of code and press the hotkey). For Mac, try Cmd instead of Ctrl and Option instead of Shift.
+
+            Nested comments are not supported!
+            There may not be /*...*/ inside another /*...*/.
+Such code will die with an error:
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          /*
+  /* nested comment ?!? */
+*/
+alert( 'World' );
+        
+      
+      
+      

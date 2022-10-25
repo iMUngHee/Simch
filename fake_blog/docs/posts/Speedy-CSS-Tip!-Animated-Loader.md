@@ -1,0 +1,11 @@
+---
+id: 174
+title: Speedy-CSS-Tip!-Animated-Loader
+date: 'Oct 25 2022'
+tags: ["web","google"]
+metaTags: ["web","google"]
+cover_image: https://velog.velcdn.com/images%2Fjyuxpi%2Fpost%2Ff272e0b6-0bd0-4e34-80f5-ab2cde66ea48%2Fimage.png
+description: ''
+---
+
+ Home  All articles Speedy CSS Tip! Animated LoaderLet's make an animated CSS loader with scoped custom properties and animation-timing-functionSep 22, 2022   Jhey Tompkins TwitterGitHubHomepageHop over to CodePen and create a new pen.Create the markup for our loader. Note the use of inline custom properties:<div class="loader" style="--count: 10">  <span style="--index: 0"></span>  <span style="--index: 1"></span>  <span style="--index: 2"></span>  <span style="--index: 3"></span>  <span style="--index: 4"></span>  <span style="--index: 5"></span>  <span style="--index: 6"></span>  <span style="--index: 7"></span>  <span style="--index: 8"></span>  <span style="--index: 9"></span></div> You can also use a generator (Pug) to configure the number of lines:- const COUNT = 10.loader(style=`--count: ${COUNT}`)  - let i = 0  while i < COUNT    span(style=`--index: ${i}`)    - i++ Give our loader some styles:loader {  --size: 10vmin;  height: var(--size);  position: relative;  width: var(--size);} Position our lines using absolute positioning and a combination of calc with transform:.loader span {  background: grey;  height: 25%;  left: 50%;  position: absolute;  top: 50%;  transform: translate(-50%, -50%)             rotate(calc(((360 / var(--count)) * var(--index)) * 1deg))             translate(0, -125%);  width: 10%;} Apply an opacity based on the --index:.loader span {  opacity: calc(var(--index) / var(--count));}  Get things spinning!.loader {  animation: spin 0.75s infinite steps(var(--count));}@keyframes spin {  to {    transform: rotate(360deg);  }} Note the use of steps(var(--count)) to get the right effect ✨Done! 🎉Prefer this in tweet form? 🐦Stay Awesome! ʕ •ᴥ•ʔCSS Last updated: Sep 22, 2022  —  Improve article   Return to all articles   Share   subscribe 

@@ -1,4 +1,4 @@
-from singleton import SingletonInstance
+from .singleton import SingletonInstance
 
 
 class Repository(SingletonInstance):

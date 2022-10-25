@@ -1,0 +1,53 @@
+---
+id: 192
+title: Non-lexical-lifetimes-(NLL)-fully-stable-|-Rust-Blog
+date: 'Oct 25 2022'
+tags: ["rust","blog"]
+metaTags: ["rust","blog"]
+cover_image: https://velog.velcdn.com/images/eslerkang/post/8a992631-4128-444f-9d54-9a354dc15984/cuddlyferris.png
+description: ''
+---
+
+
+      As of Rust 1.63 (releasing next week), the "non-lexical lifetimes" (NLL) work will be enabled by default. NLL is the second iteration of Rust's borrow checker. The RFC actually does quite a nice job of highlighting some of the motivating examples. "But," I hear you saying, "wasn't NLL included in Rust 2018?" And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in "migration mode". When in "migration mode," the compiler would run both the old and the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL.
+How does removing the old borrow checker affect users?
+At this point, we have almost completely merged "migration mode" and "regular mode", so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- Jack Huey gives the full details in his blog post.
+Credit where credit is due
+The work to remove the old borrow checker has been going on for years. It's been a long, tedious, and largely thankless process. We'd like to take a moment to highlight the various people involved and make sure they are recognized for their hard work:
+
+Jack Huey (sponsorship page), for driving the final details of stabilization (diagnostics, reconciling differences in behavior).
+Élie Roudninski, for refactoring the diagnostics code and doing the painstaking work (along with Jack) of checking each regressed case, one by one.
+Aaron Hill, for numerous improvements to bring NLL diagnostics up to par.
+Matthew Jasper, for reconciling errors around higher-ranked lifetimes and other core diagnostics improvements.
+Rémy Rakic, for rebasing Matthew's PR as well as doing other independent diagnostics work.
+Christopher Vittal, for removing "compare" mode (don't ask).
+Centril, for doing a lot of early work reconciling migration mode and the regular mode.
+And of course the members of the NLL working group (myself, Felix Klock, Santiago Pastorino (sponsorship page), Matthew Jasper, David Wood, Rémy Rakic, Paul Daniel Faria, Nick Nethercote) who delivered the feature in the first place.
+
+Jack's blog post includes a detailed narrative of all the work involved if you'd like more details! It's a fun read.
+Looking forward: what can we expect for the "borrow checker of the future"?
+The next frontier for Rust borrow checking is taking the polonius project and moving it from research experiment to production code. Polonius is a next-generation version of the borrow checker that was "spun off" from the main NLL effort in 2018, as we were getting NLL ready to ship in production. Its most important contribution is fixing a known limitation of the borrow checker, demonstrated by the following example:
+fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
+    if let Some(s) = vec.last() { // borrows vec
+        // returning s here forces vec to be borrowed
+        // for the rest of the function, even though it
+        // shouldn't have to be
+        return s; 
+    }
+    
+    // Because vec is borrowed, this call to vec.push gives
+    // an error!
+    vec.push("".to_string()); // ERROR
+    vec.last().unwrap()
+}
+
+This example doesn't compile today (try it for yourself), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant let (as shown in this example), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works1, you can watch my talk from Rust Belt Rust.
+
+
+
+Or where the name "polonius" comes from! ↩
+
+
+
+
+    

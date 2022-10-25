@@ -5,7 +5,7 @@ name = "pypi"
 
 [scripts]
 dev = "uvicorn src.main:app --reload --port 8080"
-setup = "python3 src/script/set-up.py"
+setup = "python3 src/set-up.py"
 
 [packages]
 fastapi = {extras = ["all"], version = "*"}

@@ -1,0 +1,338 @@
+---
+id: 38
+title: Function-expressions
+date: 'Oct 25 2022'
+tags: ["javascript","guide"]
+metaTags: ["javascript","guide"]
+cover_image: https://velog.velcdn.com/images/xedni/post/d36b4026-f1ff-498e-b149-99e67a9b8691/title_javascript2.png
+description: ''
+---
+
+
+      
+        
+        
+          function sayHi() {
+  alert( "Hello" );
+}
+        
+      
+      
+      
+      
+        
+        
+          let sayHi = function() {
+  alert( "Hello" );
+};
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          function sayHi() {
+  alert( "Hello" );
+}
+
+alert( sayHi ); // shows the function code
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          function sayHi() {   // (1) create
+  alert( "Hello" );
+}
+
+let func = sayHi;    // (2) copy
+
+func(); // Hello     // (3) run the copy (it works)!
+sayHi(); // Hello    //     this still works too (why wouldn't it)
+        
+      
+      
+      
+      
+        
+        
+          let sayHi = function() { // (1) create
+  alert( "Hello" );
+};
+
+let func = sayHi;
+// ...
+        
+      
+      
+      
+            Why is there a semicolon at the end?
+            You might wonder, why do Function Expressions have a semicolon ; at the end, but Function Declarations do not:
+
+      
+        
+        
+          function sayHi() {
+  // ...
+}
+
+let sayHi = function() {
+  // ...
+};
+        
+      
+      
+      The answer is simple: a Function Expression is created here as function(…) {…} inside the assignment statement: let sayHi = …;. The semicolon ; is recommended at the end of the statement, it’s not a part of the function syntax.
+The semicolon would be there for a simpler assignment, such as let sayHi = 5;, and it’s also there for a function assignment.
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+function showOk() {
+  alert( "You agreed." );
+}
+
+function showCancel() {
+  alert( "You canceled the execution." );
+}
+
+// usage: functions showOk, showCancel are passed as arguments to ask
+ask("Do you agree?", showOk, showCancel);
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
+);
+        
+      
+      
+      
+            A function is a value representing an “action”
+            Regular values like strings or numbers represent the data.
+A function can be perceived as an action.
+We can pass it between variables and run when we want.
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          sayHi("John"); // Hello, John
+
+function sayHi(name) {
+  alert( `Hello, ${name}` );
+}
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          sayHi("John"); // error!
+
+let sayHi = function(name) {  // (*) no magic any more
+  alert( `Hello, ${name}` );
+};
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let age = prompt("What is your age?", 18);
+
+// conditionally declare a function
+if (age < 18) {
+
+  function welcome() {
+    alert("Hello!");
+  }
+
+} else {
+
+  function welcome() {
+    alert("Greetings!");
+  }
+
+}
+
+// ...use it later
+welcome(); // Error: welcome is not defined
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let age = 16; // take 16 as an example
+
+if (age < 18) {
+  welcome();               // \   (runs)
+                           //  |
+  function welcome() {     //  |
+    alert("Hello!");       //  |  Function Declaration is available
+  }                        //  |  everywhere in the block where it's declared
+                           //  |
+  welcome();               // /   (runs)
+
+} else {
+
+  function welcome() {
+    alert("Greetings!");
+  }
+}
+
+// Here we're out of curly braces,
+// so we can not see Function Declarations made inside of them.
+
+welcome(); // Error: welcome is not defined
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let age = prompt("What is your age?", 18);
+
+let welcome;
+
+if (age < 18) {
+
+  welcome = function() {
+    alert("Hello!");
+  };
+
+} else {
+
+  welcome = function() {
+    alert("Greetings!");
+  };
+
+}
+
+welcome(); // ok now
+        
+      
+      
+      
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          let age = prompt("What is your age?", 18);
+
+let welcome = (age < 18) ?
+  function() { alert("Hello!"); } :
+  function() { alert("Greetings!"); };
+
+welcome(); // ok now
+        
+      
+      
+      
+            When to choose Function Declaration versus Function Expression?
+            As a rule of thumb, when we need to declare a function, the first thing to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+That’s also better for readability, as it’s easier to look up function f(…) {…} in the code than let f = function(…) {…};. Function Declarations are more “eye-catching”.
+…But if a Function Declaration does not suit us for some reason, or we need a conditional declaration (we’ve just seen an example), then Function Expression should be used.
+

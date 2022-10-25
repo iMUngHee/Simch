@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .core import Index, Search, Rank
+
 app = FastAPI()
 
 origins = [
@@ -19,8 +21,16 @@ app.add_middleware(
 
 
 @app.get("/")
-async def search(query: str = ''):
-    print(query)
-    return {
-        "slugs": ['Korea-hosts-2022-World-Bio-Summit-', 'Increasing-the-glibc-and-Linux-kernel-requirements-|-Rust-Blog', "Samsung-requests-Austria's-support-for-Busan-to-host-World-Expo-2030-", 'Legoland-crisis-pushes-BOK-into-dilemma-', "Convenience-store-owners-at-odds-with-gov't-over-plastic-bag-ban", 'Indoor-mask-rule-to-be-in-place-for-3-more-months--health-authorities-', 'Developer-console', "INTERVIEW-Incheon-mayor-banks-on-port-city's-openness-for-creative-governance-", 'Testing-Web-Design-Color-Contrast', 'Program-Frameworks-—-Python-3.10.8-documentation']
-    }
+async def search(query: str = '', algorithm: str = 'TF-IDF'):
+    tokens = Index.preprocess(query)
+    slugs = None
+    if algorithm == 'LF':
+        slugs = Search().latent_factor(tokens)
+    if algorithm == 'NAIVE':
+        slugs = Search().naive(tokens)
+    if algorithm == 'TF-IDF':
+        slugs = Search().tf_idf(tokens)
+    if algorithm == 'K-MEANS':
+        slugs = Search().k_means(tokens)
+
+    return {'slugs': Rank(slugs).work()}

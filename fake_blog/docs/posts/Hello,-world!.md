@@ -1,0 +1,101 @@
+---
+id: 26
+title: Hello,-world!
+date: 'Oct 25 2022'
+tags: ["javascript","guide"]
+metaTags: ["javascript","guide"]
+cover_image: https://velog.velcdn.com/images/xedni/post/d36b4026-f1ff-498e-b149-99e67a9b8691/title_javascript2.png
+description: ''
+---
+
+
+      
+        
+        
+          
+            
+          
+          
+            
+          
+        
+        
+          <!DOCTYPE HTML>
+<html>
+
+<body>
+
+  <p>Before the script...</p>
+
+  <script>
+    alert( 'Hello, world!' );
+  </script>
+
+  <p>...After the script.</p>
+
+</body>
+
+</html>
+        
+      
+      
+      
+      
+        
+        
+          <script src="/path/to/script.js"></script>
+        
+      
+      
+      
+      
+        
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+        
+      
+      
+      
+      
+        
+        
+          <script src="/js/script1.js"></script>
+<script src="/js/script2.js"></script>
+…
+        
+      
+      
+      
+            Please note:
+            As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
+The benefit of a separate file is that the browser will download it and store it in its cache.
+Other pages that reference the same script will take it from the cache instead of downloading it, so the file is actually downloaded only once.
+That reduces traffic and makes pages faster.
+
+            If src is set, the script content is ignored.
+            A single <script> tag can’t have both the src attribute and code inside.
+This won’t work:
+
+      
+        
+        
+          <script src="file.js">
+  alert(1); // the content is ignored, because src is set
+</script>
+        
+      
+      
+      We must choose either an external <script src="…"> or a regular <script> with code.
+The example above can be split into two scripts to work:
+
+      
+        
+        
+          <script src="file.js"></script>
+<script>
+  alert(1);
+</script>
+        
+      
+      
+      

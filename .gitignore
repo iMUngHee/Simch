@@ -3,3 +3,5 @@ data/temp
 .cache
 
 fake-data_generator/node_modules
+fake_blog/node_modules
+fake_blog/.next

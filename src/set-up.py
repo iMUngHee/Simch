@@ -3,7 +3,7 @@
 """
 
 
-from core import Crawl
+from core import Crawl, Index
 from nltk_downloads import downloader
 
 
@@ -12,3 +12,4 @@ if __name__ == '__main__':
 
     downloader()
     Crawl(BASE_URL).work()
+    Index().work()
