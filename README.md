@@ -1,5 +1,7 @@
 # SIMCH(深趣): Simple Search Engine using Data Mining
 
+![simch_logo](https://user-images.githubusercontent.com/88721306/197842363-017c0709-d07b-47fc-a57d-0b586fa723bb.png)
+
 - Naive Algorithm (BoW)
 
 - TF-IDF Score
