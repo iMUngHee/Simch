@@ -1,3 +1,4 @@
+from time import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -22,6 +23,7 @@ app.add_middleware(
 
 @app.get("/")
 async def search(query: str = '', algorithm: str = 'TF-IDF'):
+    t = time()
     tokens = Index.preprocess(query)
     slugs = None
     if algorithm == 'LF':
@@ -32,5 +34,5 @@ async def search(query: str = '', algorithm: str = 'TF-IDF'):
         slugs = Search().tf_idf(tokens)
     if algorithm == 'K-MEANS':
         slugs = Search().k_means(tokens)
-
+    print(time() - t)
     return {'slugs': Rank(slugs).work()}
